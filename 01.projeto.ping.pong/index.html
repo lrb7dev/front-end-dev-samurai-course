@@ -1,11 +1,36 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ping-Pong Game</title>
 </head>
+
 <body>
-    <h1>PING-PONG GAME</h1>
+    <canvas>
+        <script>
+            const canvasEl = document.querySelector("canvas"),
+                canvasCtx = canvasEl.getContext("2d")
+
+            //setup do game
+            function setup() {
+                //tamnho do campo
+                canvasEl.width = canvasCtx.width = window.innerWidth
+                canvasEl.height = canvasCtx.height = window.innerHeight
+                
+                
+            }
+
+            //desenho
+            function draw() {
+
+            }
+
+            //chamando a funcao setup()
+            setup()
+        </script>
+    </canvas>
 </body>
+
 </html>
