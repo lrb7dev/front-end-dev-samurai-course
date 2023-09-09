@@ -21,7 +21,7 @@
         <script>
             const canvasEl = document.querySelector("canvas"),
                 canvasCtx = canvasEl.getContext("2d")
-            
+
             //predefinicao da largura da linha
             const lineWidth = 15
 
@@ -30,8 +30,8 @@
                 //tamnho do campo
                 canvasEl.width = canvasCtx.width = window.innerWidth
                 canvasEl.height = canvasCtx.height = window.innerHeight
-                
-                
+
+
             }
 
             //desenho
@@ -40,7 +40,7 @@
                 canvasCtx.fillStyle = "#4685dd"
                 canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
 
-                //linha
+                //linha central
                 canvasCtx.fillStyle = "#ffffff"
 
                 const x = window.innerWidth / 2 - lineWidth / 2
@@ -48,6 +48,18 @@
                 const w = lineWidth
                 const h = window.innerHeight
                 canvasCtx.fillRect(x, y, w, h)
+
+                //raquete esquerda
+                canvasCtx.fillRect(10, 400, lineWidth, 200)
+
+                //raquete direita
+                canvasCtx.fillRect(window.innerWidth - lineWidth - 10,
+                    300,
+                    lineWidth,
+                    200
+                )
+
+
             }
 
             //chamando a funcao setup()
