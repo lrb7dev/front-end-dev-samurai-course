@@ -71,6 +71,20 @@
                 draw: function () {
                     //raquete direita
                     canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+                },
+            }
+
+            //objeto bola
+            const ball = {
+                x: 300,
+                y: 200,
+                r: 20,
+                draw: function () {
+                    //bola
+                    canvasCtx.beginPath()
+                    //arc(posicaoX, posicaoY, raio, inicio do raio, fim do raio, anti-horario?)
+                    canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
+                    canvasCtx.fill()
                 }
             }
 
@@ -79,8 +93,6 @@
                 //tamnho do campo
                 canvasEl.width = canvasCtx.width = field.w
                 canvasEl.height = canvasCtx.height = field.h
-
-
             }
 
             //desenho
@@ -90,13 +102,8 @@
                 line.draw()
                 leftPaddle.draw()
                 rightPaddle.draw()
+                ball.draw()
 
-
-                //bola
-                canvasCtx.beginPath()
-                //arc(posicaoX, posicaoY, raio, inicio do raio, fim do raio, anti-horario?)
-                canvasCtx.arc(450, 300, 20, 0, 2 * Math.PI, false)
-                canvasCtx.fill()
 
                 //placar
                 canvasCtx.font = "bold 72px Arial"
