@@ -25,20 +25,30 @@
             //predefinicao da largura da linha
             const lineWidth = 15
 
+            //objeto campo
+            const field = {
+                w: window.innerWidth,
+                h: window.innerHeight,
+                draw: function () {
+                    //desenho do gramado
+                    canvasCtx.fillStyle = "#4685dd"
+                    canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+                },
+            }
+
             //setup do game
             function setup() {
                 //tamnho do campo
-                canvasEl.width = canvasCtx.width = window.innerWidth
-                canvasEl.height = canvasCtx.height = window.innerHeight
+                canvasEl.width = canvasCtx.width = field.w
+                canvasEl.height = canvasCtx.height = field.h
 
 
             }
 
             //desenho
             function draw() {
-                //desenho do gramado
-                canvasCtx.fillStyle = "#4685dd"
-                canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+                //chamando o metodo do objeto campo
+                field.draw()
 
                 //linha central
                 canvasCtx.fillStyle = "#ffffff"
