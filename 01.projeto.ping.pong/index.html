@@ -94,13 +94,20 @@
                 x: 300,
                 y: 200,
                 r: 20,
+                speed: 5,
+                _move: function() {
+                    this.x += 1 * this.speed
+                    this.y += 1 * this.speed
+                },
                 draw: function () {
                     //bola
                     canvasCtx.fillStyle = "#ffffff"
                     canvasCtx.beginPath()
                     //arc(posicaoX, posicaoY, raio, inicio do raio, fim do raio, anti-horario?)
                     canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
-                    canvasCtx.fill()
+                    canvasCtx.fill(),
+
+                    this._move()
                 }
             }
 
@@ -127,6 +134,9 @@
             setup()
             //chamando a funcao de desenhar draw()
             draw()
+
+            //animacao de 60x por segundo
+            window.setInterval(draw, 1000 / 60)
         </script>
     </canvas>
 </body>
