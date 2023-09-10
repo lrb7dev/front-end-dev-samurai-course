@@ -74,6 +74,21 @@
                 },
             }
 
+            //objeto placar : neste posicao para nao sobrepor a bola
+            const score = {
+                human: 0,
+                computer: 0,
+                draw: function () {
+                    //placar
+                    canvasCtx.font = "bold 72px Arial"
+                    canvasCtx.textAlign = "center"
+                    canvasCtx.textBaseline = "top"
+                    canvasCtx.fillStyle = "#46dd85"
+                    canvasCtx.fillText(this.human, field.w / 4, 50)
+                    canvasCtx.fillText(this.computer, field.w / 4 + field.w / 2, 50)
+                }
+            }
+
             //objeto bola
             const ball = {
                 x: 300,
@@ -81,6 +96,7 @@
                 r: 20,
                 draw: function () {
                     //bola
+                    canvasCtx.fillStyle = "#ffffff"
                     canvasCtx.beginPath()
                     //arc(posicaoX, posicaoY, raio, inicio do raio, fim do raio, anti-horario?)
                     canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
@@ -102,21 +118,8 @@
                 line.draw()
                 leftPaddle.draw()
                 rightPaddle.draw()
+                score.draw()
                 ball.draw()
-
-
-                //placar
-                canvasCtx.font = "bold 72px Arial"
-                canvasCtx.textAlign = "center"
-                canvasCtx.textBaseline = "top"
-                canvasCtx.fillStyle = "#46dd8575"
-                canvasCtx.fillText('0', window.innerWidth / 4, 50)
-                canvasCtx.fillText(
-                    '0',
-                    window.innerWidth / 4 + window.innerWidth /
-                    2,
-                    50
-                )
 
             }
 
