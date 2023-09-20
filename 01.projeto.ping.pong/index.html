@@ -23,6 +23,9 @@
                 canvasCtx = canvasEl.getContext("2d"),
                 gapX = 10
 
+            //objeto mouse
+            const mouse = { x: 0, y: 0 }
+
             //objeto campo
             const field = {
                 w: window.innerWidth,
@@ -53,12 +56,20 @@
             //objeto raquete esquerda
             const leftPaddle = {
                 x: gapX,
-                y: 100,
+                y: 0,
                 w: line.w,
                 h: 200,
+                //atributo com uma funcao para mover a raquete
+                _move: function() {
+                    //pegando a coordenada do eixo Y e passando para 'y' do atributo de leftpadle
+                    //alem disso estou diminuindo essa coordenada pela (altura / 2)
+                    this.y = mouse.y - this.h / 2
+                },
                 draw: function () {
                     //raquete esquerda
                     canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+                    //animacao raquete esquerda
+                    this._move()
                 },
             }
 
@@ -156,6 +167,15 @@
 
             setup()
             main()
+
+            //evento do mouse
+            canvasEl.addEventListener("mousemove", function(e) {
+                mouse.x = e.pageX
+                mouse.y = e.pageY
+
+                //teste
+                //console.log(mouse)
+            })
 
         </script>
     </canvas>
