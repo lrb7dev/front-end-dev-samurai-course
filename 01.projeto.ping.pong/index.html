@@ -132,8 +132,24 @@
                         } else {
                             //pontuar o jogador 1
                             score.increaseHuman()
+                            this._pointUp()
                         }
                     }
+
+                    //verifica se o computador fez 1 ponto (x < 0)
+                    if(this.x < this.r + leftPaddle.w + gapX) {
+                        //verifica se a raquete esquerda esta na posicao Y da bola
+                        if(
+                            this.y + this.r > leftPaddle.y && 
+                            this.y - this.r < leftPaddle.y + leftPaddle.h) {
+                                //rebate a bola invertendo o sinal de X
+                                this._reverseX()
+                        } else {
+                            //pontuar o computador
+                            score.increaseComputer()
+                            this._pointUp()
+                        }
+                    } 
 
                     //verifica as laterias superior e inferior do campo
                     if (
