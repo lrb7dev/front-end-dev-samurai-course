@@ -60,7 +60,7 @@
                 w: line.w,
                 h: 200,
                 //atributo com uma funcao para mover a raquete
-                _move: function() {
+                _move: function () {
                     //pegando a coordenada do eixo Y e passando para 'y' do atributo de leftpadle
                     //alem disso estou diminuindo essa coordenada pela (altura / 2)
                     this.y = mouse.y - this.h / 2
@@ -79,7 +79,7 @@
                 y: 100,
                 w: line.w,
                 h: 200,
-                _move: function() {
+                _move: function () {
                     this.y = ball.y
                 },
                 draw: function () {
@@ -94,6 +94,12 @@
             const score = {
                 human: 0,
                 computer: 0,
+                increaseHuman: function() {
+                    this.human++
+                },
+                increaseComputer: function() {
+                    this.computer++
+                },
                 draw: function () {
                     //placar
                     canvasCtx.font = "bold 72px Arial"
@@ -113,23 +119,42 @@
                 speed: 5,
                 directionX: 1,
                 directionY: 1,
-                _calcPosition: function() {
+                _calcPosition: function () {
+                    //verifica se o jogador fez 1 ponto (x > largura do campo)
+                    if (this.x > field.w - this.r - rightPaddle.w - gapX) {
+                        //verifica se a raquete direita esta na posicao Y da bola
+                        if (
+                            this.y + this.r > rightPaddle.y &&
+                            this.y - this.r < rightPaddle.y + rightPaddle.h
+                        ) {
+                            //rebate a bola invertendo o sinal de X
+                            this._reverseX()
+                        } else {
+                            //pontuar o jogador 1
+                            score.increaseHuman()
+                        }
+                    }
+
                     //verifica as laterias superior e inferior do campo
-                    if(
+                    if (
                         (this.y - this.r < 0 && this.directionY < 0) ||
                         (this.y > field.h - this.r && this.directionY > 0)
-                        ) {
+                    ) {
                         //rebate a bola inventendo o sinal do eixo Y
                         this._reverseY()
                     }
                 },
-                _reverseX: function() {
+                _reverseX: function () {
                     this.directionX *= -1
                 },
-                _reverseY: function() {
+                _reverseY: function () {
                     this.directionY *= -1
                 },
-                _move: function() {
+                _pointUp: function(){
+                    this.x = field.w / 2
+                    this.y = field.h / 2
+                },
+                _move: function () {
                     this.x += this.directionX * this.speed
                     this.y += this.directionY * this.speed
                 },
@@ -141,8 +166,8 @@
                     canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
                     canvasCtx.fill(),
 
-                    //chamando funcao de calcular a posicao
-                    this._calcPosition()
+                        //chamando funcao de calcular a posicao
+                        this._calcPosition()
                     //funcao de mover
                     this._move()
                 }
@@ -173,14 +198,14 @@
             // draw()
 
             //suavizando a animacao
-            window.animateFrame = (function() {
+            window.animateFrame = (function () {
                 return (
                     window.requestAnimationFrame ||
                     window.webkitRequestAnimationFrame ||
                     window.mozRequestAnimationFrame ||
                     window.oRequestAnimationFrame ||
                     window.msRequestAnimationFrame ||
-                    function(callback) {
+                    function (callback) {
                         return window.setTimeout(callback, 1000 / 60)
                     }
                 )
@@ -195,7 +220,7 @@
             main()
 
             //evento do mouse
-            canvasEl.addEventListener("mousemove", function(e) {
+            canvasEl.addEventListener("mousemove", function (e) {
                 mouse.x = e.pageX
                 mouse.y = e.pageY
 
